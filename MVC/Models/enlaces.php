@@ -2,10 +2,10 @@
     //modelo de enlces web
     class Pagina{
         public function enlacesPaginasModel($enlaces){
-            if($enlaces)== "ingresar" || ($enlaces)== "usuarios" || ($enlaces)== "productos" || ($enlaces)== "registroProducto" || ($enlaces)== "editar" || ($enlaces)== "editarProducto" || ($enlaces)== "salir"){
+            if($enlaces == "ingresar" || ($enlaces)== "usuarios" || ($enlaces)== "productos" || ($enlaces)== "registroProducto" || ($enlaces)== "editar" || ($enlaces)== "editarProducto" || ($enlaces)== "salir"){
                 $module = "views/modules/".$enlaces.".php";
             }
-            else if($enlaces == "index"){
+            elseif($enlaces == "index"){
                 $module = "views/modules/registro.php";
             }
             elseif ($enlaces == "ok") {

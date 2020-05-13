@@ -13,9 +13,9 @@
 
             //binParam() vincula una variable de PHP a un parametro de sustitución con nombre correspondiente a la sentencia SQL que fue usada para preparar la sentencia
 
-            $stmt->bindParam(":usuario", $datosModel["usuario"], POO::PARAM_STR);
-            $stmt->bindParam(":password", $datosModel["password"], POO::PARAM_STR);
-            $stmt->bindParam(":email", $datosModel["email"], POO::PARAM_STR);
+            $stmt->bindParam(":usuario", $datosModel["usuario"], PDO::PARAM_STR);
+            $stmt->bindParam(":password", $datosModel["password"], PDO::PARAM_STR);
+            $stmt->bindParam(":email", $datosModel["email"], PDO::PARAM_STR);
 
             //regresa una respuesta satisfactoria o no
 
