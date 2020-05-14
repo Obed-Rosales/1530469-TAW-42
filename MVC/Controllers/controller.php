@@ -67,10 +67,53 @@
                 <td>'.$item["usuario"].'</td>
                 <td>'.$item["password"].'</td>
                 <td>'.$item["email"].'</td>
-                <td>'<a href="index.php?action=usuarios&idBorrar='.$item["id"]."'><button>Borrar</button></a></td>
-                </td>';
+                <td><a href="index.php?action=editar&id='.$item["id"].'"><button>Editar</button></a></td>
+                <td><a href="index.php?action=usuarios&idBorrar='.$item["id"].'"><button>Borrar</button></a></td>
+                </tr>';
         }
     }
+
+    //EDITAR USUARIO
+    public function editarUsuarioController(){
+        $datosController = $_GET["id"];
+        $respuesta=Datos::editarUsuarioModel($datosController,"usuarios");
+    }
+
+    //ACTUALIZAR USUARIO
+    public function actualizarUsuarioController(){
+        if(isset($_POST["usuarioEditar"])){
+                $datosController=array("id"=>$_POST["idEditar"],"password"=>$_POST["usuarioPassword"],"email"=>$_POST["emailEditar"]);
+            $respuesta=Datos::actualizarUsuarioController($datosController,"usuarios");
+
+            if($respuesta == "success"){
+                header("location:index.php?action=cambio");
+            }
+            else{
+                echo "error";
+            }
+        }
+    }
+
+    //BORRAR USUARIO
+    public function borrarUsuarioController(){
+        if(isset($_GET["idBorra"])){
+            $datosController = $_GET["idBorr"];
+            $respuesta=Datos::borrarUsuarioModel($datosController,"usuarios");
+            if($respuesta == "success"){
+                header("location:index.php?action=usuarios");
+            }
+        }
+    }
+
+    //LISTA DE MÉTODOS DE MODELOS POR DESARROLLAR:
+    /*
+        1.registroUsuarioModel
+        2.ingresoUsuarioModel
+        3.vistaUsuarioModel
+        4.editarUsuarioModel
+        5.actualizarUsuarioModel
+        6.borrarUsuarioModel
+    */
 }
 
 ?>
