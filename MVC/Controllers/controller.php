@@ -77,13 +77,19 @@
     public function editarUsuarioController(){
         $datosController = $_GET["id"];
         $respuesta=Datos::editarUsuarioModel($datosController,"usuarios");
+        //Diseñar la estructura de un formulario para que se muestren los datos de la consulta generada en el Modelo.
+        echo' <input type="hidden" value=" '.$respuesta["id"]. '" name=idEditar">
+        <input type="text" value="'.$respuesta["usuario"].'" name="usuarioEditar" required>
+        <input type="text" value="'.$respuesta["password"].'" name="passwordEditar" required>
+        <input type="text" value="'.$respuesta["email"].'" name="emailEditar" required>';
+
     }
 
     //ACTUALIZAR USUARIO
     public function actualizarUsuarioController(){
         if(isset($_POST["usuarioEditar"])){
                 $datosController=array("id"=>$_POST["idEditar"],"password"=>$_POST["usuarioPassword"],"email"=>$_POST["emailEditar"]);
-            $respuesta=Datos::actualizarUsuarioController($datosController,"usuarios");
+            $respuesta=Datos::actualizarUsuarioModel($datosController,"usuarios");
 
             if($respuesta == "success"){
                 header("location:index.php?action=cambio");
@@ -107,12 +113,12 @@
 
     //LISTA DE MÉTODOS DE MODELOS POR DESARROLLAR:
     /*
-        1.registroUsuarioModel
-        2.ingresoUsuarioModel
-        3.vistaUsuarioModel
-        4.editarUsuarioModel
-        5.actualizarUsuarioModel
-        6.borrarUsuarioModel
+        1.registroUsuarioModel  --Ok
+        2.ingresoUsuarioModel   --Ok
+        3.vistaUsuarioModel     --
+        4.editarUsuarioModel    --
+        5.actualizarUsuarioModel--
+        6.borrarUsuarioModel    --
     */
 }
 

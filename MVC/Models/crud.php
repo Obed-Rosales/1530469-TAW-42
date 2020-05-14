@@ -28,5 +28,37 @@
             $stmt->close();
 
         }
+
+        //Modelo ingresoUsuarioModel
+        public function ingresoUsuarioModel($datosModel,$tabla){
+            $stmt = Conexion::conectar()->prepare("SELECT usuario, password FROM $tabla WHERE usuario= :usuario");
+            $stmt->bindParam(":usuario",$datosModel["usuario"],PDO::PARAM_STR);
+            $stmt->execute();
+            //tetch() obtiene una fila de un conjunto de resultados asociado al objetivo $stmt
+            return $stmt->fetch();
+
+            $stmt->close();
+        }
+
+        //Vista de usuarios
+        public function vistaUsuarioModel(){
+
+        }
+
+        //Modelo editarUsuarioModel
+        public function editarUsuarioModel(){
+
+        }
+
+        //Modelo actualizarUsuarioModel
+        public function actualizarUsuarioModel(){
+
+        }
+
+        //Modelo borrarUsuarioModel
+        public function borrarUsuarioModel(){
+
+        }
+
     }
 ?>
