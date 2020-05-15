@@ -1,6 +1,6 @@
 <?php
     //modelo de enlces web
-    class Pagina{
+    class Paginas{
         public function enlacesPaginasModel($enlaces){
             if($enlaces == "ingresar" || ($enlaces)== "usuarios" || ($enlaces)== "productos" || ($enlaces)== "registroProducto" || ($enlaces)== "editar" || ($enlaces)== "editarProducto" || ($enlaces)== "salir"){
                 $module = "views/modules/".$enlaces.".php";

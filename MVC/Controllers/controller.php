@@ -42,6 +42,8 @@
             }
         }
     }
+
+    //INGRESO USUARIOS
     public function ingresoUsuarioController(){
         if (isset($_POST["usuarioIngreso"])) {
             $datosController=array ("usuario" => $_POST["usuarioIngreso"], "password" => $_POST["passwordIngreso"]);
@@ -115,10 +117,10 @@
     /*
         1.registroUsuarioModel  --Ok
         2.ingresoUsuarioModel   --Ok
-        3.vistaUsuarioModel     --
-        4.editarUsuarioModel    --
-        5.actualizarUsuarioModel--
-        6.borrarUsuarioModel    --
+        3.vistaUsuarioModel     --Ok
+        4.editarUsuarioModel    --Ok
+        5.actualizarUsuarioModel--Ok
+        6.borrarUsuarioModel    --Ok
     */
 }
 
