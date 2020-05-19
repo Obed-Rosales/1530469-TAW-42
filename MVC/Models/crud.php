@@ -6,7 +6,7 @@
     class Datos extends Conexion{
 
         //REGISTRO DE USUARIOS
-        public function registroUsuariosModel ($datosModel, $tabla){
+        public function registroUsuarioModel($datosModel, $tabla){
             //Prepare() Prepara la sentencia de SQL para que sea ejecutada por el método postStatement. La sentencia de SQL se puede contener desde 0 para ejecutar más parámetros.
 
             $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (usuario, password, email) VALUES (:usuario,:password,:email)");
@@ -25,7 +25,7 @@
                 return "error";
             }
 
-            $stmt -> close();
+            $stmt->close();
 
         }
 
@@ -41,7 +41,7 @@
         }
 
         //Modelo Vista de usuarios
-        public function vistaUsuarioModel($datosModel, $tabla){
+        public function vistaUsuarioModel($tabla){
             $stmt=Conexion::conectar()->prepare("SELECT id, usuario,password, email FROM $tabla");
             $stmt->execute();
 
@@ -83,13 +83,14 @@
             $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
             $stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
 
-            if($stmt->ececute()){
+            if($stmt->execute()){
                 return "success";
             }else{
                 return "error";
             }
 
             $stmt->close();
+            
         }
 
     }

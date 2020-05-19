@@ -13,8 +13,7 @@
             else{
                 $enlaces = 'index';
             }
-            //Es el momento en que el controlador invoca al modelo 
-            //llamado enlacesPaginasModel para que muestre el listado de paginas
+            //Es el momento en que el controlador invoca al modelo llamado enlacesPaginasModel para que muestre el listado de paginas
             $respuesta = Paginas::enlacesPaginasModel($enlaces);
             include $respuesta;
         }
@@ -31,7 +30,7 @@
             //que en modelo Datos el metodo registroUsuariosModel recibe en sus 
             //parametros los valores $datosController y el nombre de la tabla a
             //la cualdebe conectarse (usuarios)
-            $respuesta = Datos::registroUsuariosModel($datosController,"usuarios");
+            $respuesta = Datos::registroUsuarioModel($datosController,"usuarios");
 
             //Se imprime la respuesta en la vista 
             if ($respuesta == "success") {
@@ -66,11 +65,11 @@
         //Utilizar un foreach para iterar un array e imprimir la consulta del modelo
         foreach($respuesta as $row => $item){
             echo'<tr>
-                <td>'.$item["usuario"].'</td>
-                <td>'.$item["password"].'</td>
-                <td>'.$item["email"].'</td>
-                <td><a href="index.php?action=editar&id='.$item["id"].'"><button>Editar</button></a></td>
-                <td><a href="index.php?action=usuarios&idBorrar='.$item["id"].'"><button>Borrar</button></a></td>
+                    <td>'.$item["usuario"].'</td>
+                    <td>'.$item["password"].'</td>
+                    <td>'.$item["email"].'</td>
+                    <td><a href="index.php?action=editar&id='.$item["id"].'"><button>Editar</button></a></td>
+                    <td><a href="index.php?action=usuarios&idBorrar='.$item["id"].'"><button>Borrar</button></a></td>
                 </tr>';
         }
     }
