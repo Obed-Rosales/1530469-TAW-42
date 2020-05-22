@@ -1,0 +1,11 @@
+CREATE TABLE carrera(
+    id int(5) PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(50)
+    );
+
+create table universidad(
+    id int(5) PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(50),
+    id_carrera int(5),
+    FOREIGN KEY(id_carrera) REFERENCES carrera(id)
+    );
