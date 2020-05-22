@@ -36,16 +36,16 @@
 
         function update($data,$date){
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE estudiante  set  cedula=?, nombre =?, apellidos=?,promedio=?, edad=?, fecha=? WHERE id = ? ";
+            $sql = "UPDATE universidad  set  nombre=? WHERE id = ? ";
             $q = $this->DB->prepare($sql);
-            $q->execute(array($data['cedula'],$data['nombre'],$data['apellidos'],$data['promedio'],$data['edad'],$data['fecha'], $date));
+            $q->execute(array($data['nombre']));
             Database::disconnect();
 
         }
 
         function delete($date){
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="DELETE FROM estudiante where id=?";
+            $sql="DELETE FROM universidad where id=?";
             $q=$this->DB->prepare($sql);
             $q->execute(array($date));
             Database::disconnect();
