@@ -31,7 +31,7 @@
         function get_datosE(){
 
             
-            $data['id']=$_REQUEST['txt_id'];
+            //$data['id']=$_REQUEST['txt_id'];
             $data['cedula']=$_REQUEST['txt_cedula'];
             $data['nombre']=$_REQUEST['txt_nombre'];
             $data['apellidos']=$_REQUEST['txt_apellidos'];

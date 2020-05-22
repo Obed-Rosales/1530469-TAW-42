@@ -1,10 +1,10 @@
 <div class="container">
     <div class="jumbotron">
-        <h2>formulario registro</h2>
+        <h2>formulario registro de universidad</h2>
 
     </div>
     <div class="col-md-6 col-md-offset-3">
-        <div class="form-horizontal" >
+        <div class="form-horizontal">
             <?php if($data['id']==""){ ?>
             <form action="index.php?m=get_datosE" method="post">
             <?php } ?>
@@ -21,9 +21,9 @@
                 </div> 
                 -->  
                 <div class="form-group">
-                    <label class=" col-sm-2 control-label" for="txt_cedula">CEDULA:</label>
+                    <label class=" col-sm-2 control-label" for="txt_cedula">CÓDIGO:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="txt_cedula" value="<?php echo $data['cedula']; ?>">
+                        <input type="text" class="form-control" name="txt_codigo" value="<?php echo $data['codigo']; ?>">
                     </div>
                     
                 </div>
@@ -34,34 +34,7 @@
                     </div>
                     
                 </div>
-                <div class="form-group">
-                    <label class=" col-sm-2 control-label" for="txt_apellidos">APELLIDOS:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="txt_apellidos" value="<?php echo $data['apellidos']; ?>">
-                    </div>
-                    
-                </div>
-                <div class="form-group">
-                    <label class=" col-sm-2 control-label" for="txt_promedio">PROMEDIO:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="txt_promedio" value="<?php echo $data['promedio']; ?>">
-                    </div>
-                    
-                </div>
-                <div class="form-group">
-                    <label class=" col-sm-2 control-label" for="txt_edad">EDAD:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="txt_edad" value="<?php echo $data['edad']; ?>">
-                    </div>
-                    
-                </div>
-                <div class="form-group">
-                    <label class=" col-sm-2 control-label" for="txt_fecha">fecha:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="txt_fecha" value="<?php echo $data['fecha']; ?>">
-                    </div>
-                    
-                </div>
+                
                 <div class="form-group">
                     <div class="col-md-12 col-md-off-set-3">
                     <?php if($data['id']==""){ ?>
