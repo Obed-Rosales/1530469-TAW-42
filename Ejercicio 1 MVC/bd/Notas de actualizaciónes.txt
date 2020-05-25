@@ -3,9 +3,23 @@ CREATE TABLE carrera(
     nombre varchar(50)
     );
 
-create table universidad(
+CREATE TABLE universidad(
     id int(5) PRIMARY KEY AUTO_INCREMENT,
     nombre varchar(50),
     id_carrera int(5),
     FOREIGN KEY(id_carrera) REFERENCES carrera(id)
     );
+
+CREATE TABLE estudiante(
+  	id int(5) PRIMARY KEY AUTO_INCREMENT,
+  	cedula int(10) NOT NULL,
+  	nombre varchar(50) NOT NULL,
+  	apellidos varchar(50) NOT NULL,
+  	promedio int(5) NOT NULL,
+  	edad int(3) NOT NULL,
+  	fecha date NOT NULL,
+    id_carrera int(5),
+    id_universidad int(5),
+    FOREIGN KEY(id_carrera) REFERENCES carrera(id),
+    FOREIGN KEY(id_universidad) REFERENCES universidad(id)
+);

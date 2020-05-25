@@ -2,9 +2,9 @@
 class Database
 {
     private static $dbName = 'ejercicio' ;
-    private static $dbHost = 'localhost' ;
-    private static $dbUsername = 'root';
-    private static $dbUserPassword = 'udenar';
+    private static $dbHost = '167.99.145.197';
+    private static $dbUsername = 'obed';
+    private static $dbUserPassword = 'obed';
      
     private static $cont  = null;
      

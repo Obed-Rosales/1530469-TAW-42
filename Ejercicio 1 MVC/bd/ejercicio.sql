@@ -38,9 +38,9 @@ CREATE TABLE `carrera` (
 -- Estructura de tabla para la tabla `estudiante`
 --
 
-CREATE TABLE `estudiante` (
-  `id` int(5) NOT NULL,
-  `cedula` int(10) NOT NULL,
+CREATE TABLE estudiante(
+  id int(5) NOT NULL,
+  cedula` int(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `promedio` int(5) NOT NULL,
