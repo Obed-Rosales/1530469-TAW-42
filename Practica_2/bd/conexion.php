@@ -2,7 +2,7 @@
 class Database
 {
     private static $dbName = 'ejercicio' ;
-    private static $dbHost = '167.99.145.197';
+    private static $dbHost = '167.99.145.197/phpmyadmin/';
     private static $dbUsername = 'obed';
     private static $dbUserPassword = 'obed';
      
