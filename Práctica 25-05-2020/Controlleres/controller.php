@@ -10,7 +10,7 @@
                 if($respuesta["usuario"]== $_POST["txtUser"] && password_verify($_POST["passwordIngreso"], $respuesta['contrasena'])){
                     session_start();
                     $SESSION["validar"] = true;
-                    header("locarion:index.php?action=usuarios");
+                    header("location:index.php?action=usuarios");
                 }else{
                     header("location:index.php?action=fallo");
                 }

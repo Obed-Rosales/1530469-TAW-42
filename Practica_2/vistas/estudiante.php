@@ -1,6 +1,6 @@
 <div class="container">
     <div class="jumbotron">
-        <h2>formulario registro</h2>
+        <h2>formulario registro de estudiantes</h2>
 
     </div>
     <div class="col-md-6 col-md-offset-3">
