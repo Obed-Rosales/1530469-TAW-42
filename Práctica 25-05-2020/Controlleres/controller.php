@@ -249,5 +249,16 @@
         }
 
 
+        public function eliminarUserController(){
+            if(isset($_GET["idBorra"])){
+                $datosController = $_GET["idBorrar"];
+                $respuesta=Datos::borrarUsuarioModel($datosController,"usuarios");
+                if($respuesta == "success"){
+                    header("location:index.php?action=usuarios");
+                }
+            }
+        }
+
+
         }
 ?>
