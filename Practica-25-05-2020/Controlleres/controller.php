@@ -28,11 +28,11 @@
 
         //CONTROLADORES PARA LOS USUARIOS
         /*-- Este controller a partir de la función password_verify compara por hash la contraseña ingresada con la que está en la base de datos si es correcta guarda en el arreglo session los datos del usuario y manda al inventario o marcará mensaje de error --*/
-        public function ingresoUsuarioController(){
+        public function ingresoUserController(){
             if (isset($_POST["txtUser"]) && isset($_POST["txtPassword"])) {
                 //Guarda en el array los valores de los tect de la vista (usuario y contraseña)
                 $datosController = array ("user" => $_POST["txtUser"], "password" => $_POST["txtPassword"]);
-                $respuesta = Datos::ingresoUsuarioModel($datosController, "users");
+                $respuesta = Datos::ingresoUserModel($datosController, "users");
                 //Validar la respuesta del modelo para ver si es un usuario correcto
                 if($respuesta["usuario"]== $_POST["txtUser"] && password_verify($_POST["passwordIngreso"], $respuesta['contrasena'])){
                     session_start();
@@ -57,7 +57,7 @@
 
         /*-- Controlador para cargar todos los datos de los usuarios, la contraseña no se puede cargar debido a que independientemente de si se muestra o no, está encriptada --*/
     public function vistaUsuariosController(){
-        $respuesta = Datos::vistaUsuarioModel("users");
+        $respuesta = Datos::vistaUserModel("users");
         //Utilizar un foreach para iterar un array e imprimir la consulta del modelo
         foreach($respuesta as $row => $item){
             echo'
@@ -252,13 +252,46 @@
         public function eliminarUserController(){
             if(isset($_GET["idBorra"])){
                 $datosController = $_GET["idBorrar"];
-                $respuesta=Datos::borrarUsuarioModel($datosController,"usuarios");
+                $respuesta=Datos::borrarUserModel($datosController,"usuarios");
                 if($respuesta == "success"){
                     header("location:index.php?action=usuarios");
                 }
             }
         }
 
+        public function contarFilas(){
+            $respuesta_users = Datos::
+
+            echo '
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>'.$respuesta_users["filas"].'</h3>
+                            <p>Total de Usuarios</p>
+                        </div>
+                        <div class="icon">
+                            <i class="far fa-address-card"></i>
+                        </div>
+                        <a class="small-box-footer" href="index.php?action=usuarios">Más <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            ';
+        }
+    }
+?>
+<?php
+// MODELO PARA EL TABLERO //
+        /*-- Este modelo permite conocer el numero de filas en determinada tabla, se utiliza para mostrar información en el tablero --*/
+        public function contarFilasModel($tabla) {
+            $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) AS 'filas' FROM $tabla");
+            $stmt->execute();
+            return $stmt->fetch();
+            $stmt->close();
+        }
+
+
+
+        }
 
         }
 ?>

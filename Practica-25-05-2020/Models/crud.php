@@ -9,14 +9,14 @@
 
         //MODELOS PARA LOS USUARIOS
         //Modelo para el inicio de sesion de los usuarios
-        public function ingresoUsuarioModel($datosModel, $tabla){
+        public function ingresoUserModel($datosModel, $tabla){
             //Prepara las sentencias de PDO para ejecutar el Qery de validacion de usuario
             $stmt = Conexion::conectar()->prepare("SELECT user_id AS ");
         }
 
 
         //Este modelo sirve para mostrar toda la informacion de los usuarios que existen
-        public function vistaUsersModel($tabla){
+        public function vistaUserModel($tabla){
             //Prepara la sentencia PDO
             $stmt = Conexion::conectar()->prepare("SELECT user_id AS 'id', firstname, lastname, user_name, user_password, user_email, date_added FROM $tabla");
         }
@@ -30,6 +30,7 @@
             $stmt->bindParam(":usuario",$datosModel["usuario"],PDO::PARAM_STR);
             $stmt->bindParam(":contra",$datosModel["contra"],PDO::PARAM_STR);
             $stmt->bindParam(":email",$datosModel["email"],PDO::PARAM_STR);
+            $stmt->bindParam(":id",$datosModel["id"],PDO::PARAM_STR);
             if($stmt->execute()){
                 return "success";
             }else {
@@ -43,6 +44,13 @@
 
         }
 
+
+        // Sentencia de PDO para ejecutar la actualizaci[on del usuario
+        public function actualizarUserModel($datosModel, $tabla){
+            //Sentencia de PDO para ejecutar la actualizacion del usuario
+            $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET firstname = :nusuario, lastname = :usuario, user_name = :usuario, user_password = :contra, user_email = :email WHERE user_id = :id");
+            $stmt -> bindParam(":ausuario",$datosModel["ausuario"],PDO::PARAM_STR);
+        }
         //Este modelo sirve para eliminar a un usuario de la base de datos
         public function eliminarUserModel($datosModel, $tabla){
             $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE user_id = :id");
