@@ -44,7 +44,7 @@
             <div class="container-fluid">
                 <div class="row mr-3 mt-2 mb-2">
                     <?php
-                        //Se verifica que la vista actual sea tablero
+                        //Se verifica que la vista actual sea el tablero, en ese caso se muestra el titulo de la vista
                         if ($_GET['action']=='tablero') {
                     ?>
                         <div class="col-sm-12">
@@ -64,7 +64,8 @@
         </div>
     </div>
     <?php
-    if($_GET['action']!='ingresar'){
+    //Se verifica que la vista actual no sea el login, en caso de que sea el login, el footer del template no se muestra
+    if($_GET['action'] != 'ingresar'){
         ?>
     <?php
     }
@@ -90,8 +91,6 @@
     <!-- JQVMap -->
     <script src="views/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
     <script src="views/assets/plugins/jqvmap/maps/jquery.vmap.world.js"></script>
-    
-de upvictoria upvictoria a Todos los participantes:
 <!-- jQuery Knob Chart -->
     <script src="views/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
     <!-- daterangepicker -->
@@ -108,8 +107,6 @@ de upvictoria upvictoria a Todos los participantes:
     <!-- DataTables -->
     <script src="views/assets/plugins/datatables/jquery.dataTables.js"></script>
     <script src="views/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    
-de upvictoria upvictoria a Todos los participantes:
 <!-- page script -->
     <script>
     $(function () {

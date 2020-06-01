@@ -55,9 +55,9 @@
 
 
 
-        /*-- Controlador para cargar todos los datos de los usuarios, la contraseña no se puede cargar debido a que independientemente de si se muestra o no, está encriptada --*/
-    public function vistaUsuariosController(){
-        $respuesta = Datos::vistaUserModel("users");
+    /*-- Controlador para cargar todos los datos de los usuarios, la contraseña no se puede cargar debido a que independientemente de si se muestra o no, está encriptada --*/
+    public function vistaUsersController(){
+        $respuesta = Datos::vistaUsersModel("users");
         //Utilizar un foreach para iterar un array e imprimir la consulta del modelo
         foreach($respuesta as $row => $item){
             echo'
@@ -73,7 +73,7 @@
                 </tr>
             ';
         }
-    }
+    }    
 
 
 
@@ -252,16 +252,23 @@
         public function eliminarUserController(){
             if(isset($_GET["idBorra"])){
                 $datosController = $_GET["idBorrar"];
-                $respuesta=Datos::borrarUserModel($datosController,"usuarios");
+                $respuesta=Datos::eliminarUserModel($datosController,"usuarios");
                 if($respuesta == "success"){
                     header("location:index.php?action=usuarios");
                 }
             }
         }
-
+        //CONTROLES PARA EL TABLERO
+        /*-- Este controlador sirve para mostrarle al usuario las cajas donde tiene informacion sobre los usuarios, productos y ventas registradas, así como los movimientos que se tienen en el historial (altas/bajas de productos) y las ganancias que se tienen de acuerdo a todas las ventas--*/
         public function contarFilas(){
-            $respuesta_users = Datos::
-
+            $respuesta_users = Datos::contarFilasModel("users");
+            /*--
+            $respuesta_products = Datos::contarFilasModel("products");
+            $respuesta_categories = Datos::contarFilasModel("categories");
+            $respuesta_historial = Datos::contarFilasModel("historial");
+            $respuesta_ventas = Datos::contarFilasModel("sales");
+            $respuesta_totales = Datos::contarFilasModel("sales");
+            --*/
             echo '
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
@@ -277,21 +284,88 @@
                 </div>
             ';
         }
+    
+
+        /*-- Controlador para cargar todos los datos de los usuarios, la contraseña no se puede cargar debido a que independientemente de si se muestra o no, está encriptada --*/
+        public function vistaProductsController(){
+            $respuesta = Datos::vistaUsersModel("products");
+            //Utilizar un foreach para iterar un array e imprimir la consulta del modelo
+            foreach($respuesta as $row => $item){
+                echo'
+                    <tr>
+                        <td>
+                            <a href="index.php?action=usuarios&idUserEditar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toogle="tooltrip"><i class="fa fa-edit></i></a>
+                        </td>
+                        <td>'.$item["id"].'</td>
+                        <td>'.$item["codigo"].'</td>
+                        <td>'.$item["producto"].'</td>
+                        <td>'.$item["fecha"].'</td>
+                        <td>'.$item["precio"].'</td>
+                        <td>'.$item["stock"].'</td>
+                        <td>'.$item["categoria"].'</td>
+                        <td><a href="index.php?action=inventario&idProductAdd='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Agregar" data-toogle="tooltrip"><i class="fa fa-edit></i></a>
+                        <td><a href="index.php?action=inventario&idProductDell='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Quitar de Stock" data-toogle="tooltrip"><i class="fa fa-edit></i></a>
+                    </tr>
+                ';
+            }
+        }
+        //Esta funcion permite llamar 
+        public function registrarProductController(){
+            ?>
+            <div class="col-md-6 mt-3">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4><b>Registro</b> de Productos</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="index.php?action=inventario">
+                            <div class="form-group">
+                                <label for="codigotxt">Código: </label>
+                                <input class="form-control" type="text" name="codigotxt" id="codigotxt" placeholder="Código del producto">
+                            </div>
+                            <div class="form-group">
+                                <label for="nombretxt">Nombre: </label>
+                                <input class="form-control" type="text" name="nombretxt" id="nombretxt" placeholder="Nombre del producto">
+                            </div>
+                            <div class="form-group">
+                                <label for="Preciotxt">Precio: </label>
+                                <input class="form-control" type="number" name="preciotxt" id="preciotxt" placeholder="Precio del producto">
+                            </div>
+                            <div class="form-group">
+                                <label for="stocktxt">Stock: </label>
+                                <input class="form-control" type="number" name="stocktxt" id="stocktxt" min="1" placeholder="Cantidad de stock del producto">
+                            </div>
+                            <div class="form-group">
+                                <label for="referenciatxt">Motivo: </label>
+                                <input class="form-control" type="text" name="referenciatxt" id="referenciatxt" placeholder="Referencia del producto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoriatxt">Categoría: </label>
+                                <select name="categoria" id="categoria" class="form-control">
+                                    <?php
+                                        $respuesta_categoria = Datos::obtenerCategoryModel("categories");
+                                        foreach($respuesta_categoria as $row => $item){
+                                    ?>
+                                            <option value="<?php echo $item["id"]; ?>"><?php echo $item["categoria"];?></option>"
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Agregar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php //Se abre el php
+        }
+        
+        /*-- Esta funcion permite insertar productos llamando al modelo  que se encuentra en  elarchivo crud de modelos confirma con un isset que la caja de texto del codigo este llena y procede a llenar en una variable llamada datos controller este arreglo se manda como parametro aligual que elnombre de la tabla,una vez se obtiene una respuesta de la funcion del modelo de inserccion tenemos que checar
+        si la respuesta fue afirmativa hubo un error y mostrara los respectivas alerta,para insertar datos en la tabla de historial se tiene que mandar a un modelollamado ultimoproductmodel este traera el ultimo dato insertado que es el id del producto que se manda en elarray de datoscontroller2 junto al nombre de la tabla asi insertando los datos en la tabla historial --*/
+        public function insertarProductController(){
+            if(isset($_POST["codigotxt"])){
+                //$datosController = array["codigo"=>$_POST["codigotxt"],"precio"=>$_POST["preciotxt"],"stock"=>$_POST["stocktxt"],"categoria"=>$_POST["categoriatxt"],"codigo"=>$_POST["codigotxt"],]
+            }
+        }
     }
-?>
-<?php
-// MODELO PARA EL TABLERO //
-        /*-- Este modelo permite conocer el numero de filas en determinada tabla, se utiliza para mostrar información en el tablero --*/
-        public function contarFilasModel($tabla) {
-            $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) AS 'filas' FROM $tabla");
-            $stmt->execute();
-            return $stmt->fetch();
-            $stmt->close();
-        }
-
-
-
-        }
-
-        }
 ?>

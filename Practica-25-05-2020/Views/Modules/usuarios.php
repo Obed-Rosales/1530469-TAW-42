@@ -23,19 +23,19 @@
                 <h3 class="card-title">Usuarios</h3>
             </div>
             <div class="card-body">
-                <div class="row md-4">
+                <div class="row mb-4">
                     <div class="col-sm-6">
                         <a href="index.php?action=usuarios&registrar" class="btn btn-info">Agregar nuevo usuario</a>
                     </div>
                 </div>
-                <div id="example2wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="example1" class="table table-hover">
+                            <table id="example1" class="table table-hover m-0 table-bordered table-striped">
                                 <thead class="table-info">
                                     <tr>
-                                        <th>Editar?</th>
-                                        <th>Eliminar?</th>
+                                        <th>¿Editar?</th>
+                                        <th>¿Eliminar?</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Usuario</th>
@@ -43,11 +43,17 @@
                                         <th>Fecha de insercion</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <?php
+                                    //Se llama al controlador que muestra las categorias que existen
+                                    $usuarios->vistaUsersController();
+                                    ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!--/.container-fluid -->
 </div>
