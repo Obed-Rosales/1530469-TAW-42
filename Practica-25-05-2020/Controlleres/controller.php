@@ -492,5 +492,87 @@
                 }
             }
         }
+        //Esta funcion  permite quitar productos al stock atravez del boton y un formulario ...
+        public function delProductController(){
+            $datosController = $_GET["idProductDel"];
+            $respuesta = Datos::editarProductsModel($datosController,"products");
+            ?>
+            <div class="col-md-6 mt-3">
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h4><b>Eliminar</b> stock al producto</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="index.php?action=inventario">
+                            <div class="form-group">
+                                <input type="hidden" name="idProductDel" class="form-control" value="<?php echo $respuesta["id"]; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="codigotxtEditar">Stock: </label>
+                                <input class="form-control" name="delstocktxt" id="delstocktxt" type="number" min="1" max="<?php echo $respuesta["stock"]; ?>" value="<?php echo $respuesta["stock"]; ?>" required placeholder="Stock de producto">
+                            </div>
+                            <div class="form-group">
+                                <label for="referenciatxtdel">Motivo: </label>
+                                <input class="form-control" name="referenciatxtdel" id="referenciatxtdel" type="text" required placeholder="Referencia del producto">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Realizar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        //Controladores para historial
+        //Este controlador funciona para mostrar los datos de la tabla historial al usuario
+        public function vistaHistorialController(){
+            $respuesta = Datos::vistaHistorialModel("historial");
+            foreach ($respuesta as $row => $item) {
+                echo '
+                    <tr>
+                        <td>'.$item["usuario"].'</td>
+                        <td>'.$item["product"].'</td>
+                    </tr>
+                ';
+            }
+        }
+        //CONTROLADORES PARA CATEGORIAS//
+        // Este controlador permite mostrar cada uno de los requisitos que se tienen almacenados en la base de datos
+        public function vistaCategoriesController(){
+            $respuesta = Datos::vistaCategoriesController("categories");
+            foreach ($respuesta as $row => $item) {
+                echo '
+                    <tr>
+                        <td>
+                            <a href="index.php?action=categorias&CategoryEditar='.$item["idc"].'
+                            
+                ';//Falta terminar el echo
+            }
+        }
+        //Este controlador permite mostrar un formulario para que el usuario pueda agregar una categoria a la base de datos
+        public function registrarCategoryController(){
+            ?>
+            <div class="col-md-6 mt-3">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4><b>Registro</b> de categorias</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="index.php?action=categorias">
+                            <div class="form-group">
+                                <label for="ncategoriatxt">Nombre de la categoria: </label>
+                                <input class="form-control" type="text" name="ncategoriatxt" id="ncategoriatxt" placeholder="Ingrese el nombre de la categoria">
+                            </div>
+                            <div class="form-group">
+                                <label for="dcategoriatxt">Descripcion de la categoria: </label>
+                                <input class="form-control" type="text" name="dcategoriatxt" id="dcategoriatxt" placeholder="Ingrese la descripcion de la categoria">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Agregar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        //Este controlador sirve para insertar la categoria que acaba de ingresar el usuario y notificar si se realizó
     }
 ?>
