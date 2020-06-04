@@ -469,10 +469,28 @@
                     echo '
                     <div class="col-md-6 mt-3">
                         <div class="alert alert-success alert-dismisabla>
-                    '
+                    ';
+                }else {
+                    echo '';
                 }
             }
         }
-        
+        //Esta funcion actualiza y llama al modelo de la tabla producto
+        public function actualizar2StockController(){
+            if (isset($_POST["delstocktxt"])) {
+                $datosController = array("id"=>$_POST["idProductDel"],"stock"=>$_POST["delstocktxt"]);
+                $respuesta = Datos::pullProductsModel($datosController,"products");
+                if ($respuesta == "success") {
+                    //Falta terminar el array y los echos ---------------------------------------------------------------------------
+                    $datosController2 = array("user"=>$_SESSION["id"],"cantidad"=>$_POST["delstocktxt"],"product"=>$_POST["idProductDel"]);
+                    echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-success alert-dismisabla>
+                    ';
+                }else {
+                    echo '';
+                }
+            }
+        }
     }
 ?>
