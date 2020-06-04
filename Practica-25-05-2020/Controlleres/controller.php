@@ -458,6 +458,21 @@
             </div>
             <?php
         }
-        //////////////////////////////////////////////////////////// siguiente controller
+        //Esta funcion actualiza y llama al model de la tabla producto a su vez insertqa una fila
+        public function actualizar1StockController(){
+            if (isset($_POST["addstocktxt"])) {
+                $datosController = array("id"=>$_POST["idProductAdd"],"stock"=>$_POST["addstocktxt"]);
+                $respuesta = Datos::pushProductsModel($datosController,"products");
+                if ($respuesta == "success") {
+                    //Falta terminar el array y los echos ---------------------------------------------------------------------------
+                    $datosController2 = array("user"=>$_SESSION["id"],"cantidad"=>$_POST["addstocktxt"],"product");
+                    echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-success alert-dismisabla>
+                    '
+                }
+            }
+        }
+        
     }
 ?>
