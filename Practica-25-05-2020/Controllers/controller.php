@@ -769,7 +769,7 @@
         public function actualizarCategoryController(){
             if (isset($_POST["ncategoriatxteditar"]) && isset($_POST["dcategoriatxteditar"])) {
                 $datosController = array("id"=>$_POST["idCategoryEditar"],"nombre_categoria"=>$_POST["ncategoriatxteditar"],"descripcion_categoria"=>$_POST["dcategoriatxteditar"]);
-// Pendiente de revisar/////////////////////////////////////////////////////////
+// Pendiente de revisar/////////////////////////////////////////////////////////////////////////////////////////
                 $respuesta = Datos::actualizarCategoryModel($datosController,"categories");
                 if ($respuesta == "success") {
                     $datosController2 = array("user"=>$_SESSION["id"],"cantidad"=>$_POST["delstocktxt"],"product"=>$_POST["idProductDel"],"note"=>$_SESSION["nombre_usuario"]."quito","reference"=>$_POST["referenciatxtdel"]);

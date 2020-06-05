@@ -223,8 +223,11 @@
         	$stmt -> close();
         }
         //Este modelo utiliza para insertar una nueva categoría a la base de datos
+//Por revisar----------------------------------------------------------------------------
         public function insertarCategoryModel($datosModel, $tabla){
-        	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (name_category, descripcion_category) VALUES (:ncategoria, :dcategoria)");
+            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (name_category, description_category) VALUES (:ncategoria, :dcategoria)");
+            $stmt->bindParam(":ncategoria",$datosModel["nombre_categoria"],PDO::PARAM_STR);
+            $stmt->bindParam(":dcategoria",$datosModel["descripcion_categoria"],PDO::PARAM_STR);
         	if($stmt->execute()){
         		return "success";
         	}else{
@@ -237,7 +240,7 @@
         	$stmt = Conexion::conectar()->prepare("SELECT id_category AS 'id', name_category AS 'nombre_categoria', descripcion_category AS 'descripcion_categoria' FROM $tabla WHERE id_category = :id");
         	$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
         	$stmt -> execute();
-        	return $stmt->fetchAll();
+        	return $stmt->fetch();
         	$stmt -> close();
         }
         //Este modelo se utiliza para modificar una categoria
@@ -253,7 +256,7 @@
             }
             $stmt->close();
         }
-        //Este modelo se utiliza para eliminar una categoria
+        //Este modelo se utiliza para eliminar una categoría
         public function eliminarCategoryModel($datosModel,$tabla){
             $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_category = :id");
             $stmt->bindParam(":id",$datosModel,PDO::PARAM_INT);
