@@ -657,6 +657,10 @@
             </div>
             <?php
         }
+
+
+
+
         //CONTROLADORES PAR EL HISTORIAL//
         //Este controlador funciona para mostrar los datos de la tabla historial al usuario
         public function vistaHistorialController(){
@@ -674,9 +678,12 @@
                 ';
             }
         }
+
+
+
         //CONTROLADORES PARA CATEGORÍAS//
         // Este controlador permite mostrar cada uno de los requisitos que se tienen almacenados en la base de datos mediante el uso de un modelo que realiza la consulta y en esta función solo se recopila la informacion obtenida de ahí y mostrada de manera correcta mediante el uso de un ciclo foreach
-        public function vistaCategoriesController(){
+        public function vistaCategoriasController(){
             $respuesta = Datos::vistaCategoriesModel("categories");
             foreach ($respuesta as $row => $item) {
                 echo '
@@ -723,6 +730,21 @@
         //Este controlador sirve para insertar la categoria que acaba de ingresar el usuario y notificar si se realizó dicha actividad o si hubo algun error
         public function insertarCategoryController(){
             //...
+
+        }
+
+        //Aun no se ha visto
+        public function actualizarCategoryController(){
+
+        }
+
+        //Aun no se ha visto
+        public function editarCategoryController(){
+
+        }
+
+        //Aun no se ha visto
+        public function eliminarCategoryController(){
 
         }
     }
