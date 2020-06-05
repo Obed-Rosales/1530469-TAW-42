@@ -729,7 +729,39 @@
         }
         //Este controlador sirve para insertar la categoria que acaba de ingresar el usuario y notificar si se realizó dicha actividad o si hubo algun error
         public function insertarCategoryController(){
-            //...
+            if(isset($_POST["ncategoriatxt"]) && isset($_POST["dcategoriatxt"])){
+                $datosController = array("nombre_categoria"=>$_POST["ncategoriatxt"],"descripcion_categoria"=>$_POST["dcategoriatxt"]);
+                $respuesta = Datos::insertarCategoryModel($datosController,"categories");
+                if ($respuesta == "success") {
+                    $datosController2 = array("user"=>$_SESSION["id"],"cantidad"=>$_POST["delstocktxt"],"product"=>$_POST["idProductDel"],"note"=>$_SESSION["nombre_usuario"]."quito","reference"=>$_POST["referenciatxtdel"]);
+                    $respuesta2 = Datos::insertarHistorialModel($datosController2,"historial");
+                echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-success alert-dismissible>
+                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h5>
+                                <i class="icon fas fa-check"></i>
+                                ¡Éxito!
+                            </h5>
+                            Stock modificado con éxito.
+                        </div>
+                    </div>
+                ';
+                } else {
+                    echo '
+                        <div class="col-md-6 mt-3">
+                            <div class="alert alert-danger alert-dismissible>
+                                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                                <h5>
+                                    <i class="icon fas fa-check"></i>
+                                    ¡Error!
+                                </h5>
+                                Error al modificar el stock
+                            </div>
+                        </div>
+                    ';
+                }
+            }
 
         }
 
@@ -740,7 +772,33 @@
 
         //Aun no se ha visto
         public function editarCategoryController(){
-
+            $datosController = $_GET["idCategoryEditar"];
+            $respuesta = Datos::editarCategoryModel($datosController,"categories");
+            ?>
+            <div class="col-md-6 mt-3">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h4><b>Editor</b> de categorías</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="index.php?action=categorias">
+                            <div class="form-group">
+                                <input type="hidden" name="idCategoryEditar" class="form-control" value="<?php echo $respuesta["id"]; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ncategoriatxt">Nombre de la categoría: </label>
+                                <input type="text" name="ncategoriatxteditar" id="ncategoriatxteditar" class="form-control" value="<?php echo $respuesta["nombre_categoria"]; ?>" placeholder="Ingrese el nombre de la categoría" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dcategoriatxt">Descripción de la categoría: </label>
+                                <input type="text" name="dcategoriatxteditar" id="dcategoriatxteditar" class="form-control" value="<?php echo $respuesta["descripcion_categoria"]; ?>" placeholder="Ingresela descripción de la categoría" required>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Editar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php
         }
 
         //Aun no se ha visto
