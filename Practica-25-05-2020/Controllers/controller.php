@@ -767,7 +767,40 @@
 
         //Aun no se ha visto
         public function actualizarCategoryController(){
-
+            if (isset($_POST["ncategoriatxteditar"]) && isset($_POST["dcategoriatxteditar"])) {
+                $datosController = array("id"=>$_POST["idCategoryEditar"],"nombre_categoria"=>$_POST["ncategoriatxteditar"],"descripcion_categoria"=>$_POST["dcategoriatxteditar"]);
+// Pendiente de revisar/////////////////////////////////////////////////////////
+                $respuesta = Datos::actualizarCategoryModel($datosController,"categories");
+                if ($respuesta == "success") {
+                    $datosController2 = array("user"=>$_SESSION["id"],"cantidad"=>$_POST["delstocktxt"],"product"=>$_POST["idProductDel"],"note"=>$_SESSION["nombre_usuario"]."quito","reference"=>$_POST["referenciatxtdel"]);
+                    $respuesta2 = Datos::insertarHistorialModel($datosController2,"historial");
+                echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-success alert-dismissible>
+                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h5>
+                                <i class="icon fas fa-check"></i>
+                                ¡Éxito!
+                            </h5>
+                            Stock modificado con éxito.
+                        </div>
+                    </div>
+                ';
+                } else {
+                    echo '
+                        <div class="col-md-6 mt-3">
+                            <div class="alert alert-danger alert-dismissible>
+                                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                                <h5>
+                                    <i class="icon fas fa-check"></i>
+                                    ¡Error!
+                                </h5>
+                                Error al modificar el stock
+                            </div>
+                        </div>
+                    ';
+                }
+            }
         }
 
         //Aun no se ha visto
@@ -803,7 +836,37 @@
 
         //Aun no se ha visto
         public function eliminarCategoryController(){
-
+            if(isset($_GET["idBorrar"])){
+                $datosController = $_GET["idBorrar"];
+                $respuesta = Datos::eliminarCategoryModel($datosController,"categories");
+                if ($respuesta == "success") {
+                echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-success alert-dismissible>
+                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h5>
+                                <i class="icon fas fa-check"></i>
+                                ¡Éxito!
+                            </h5>
+                            Stock modificado con éxito.
+                        </div>
+                    </div>
+                ';
+                } else {
+                    echo '
+                        <div class="col-md-6 mt-3">
+                            <div class="alert alert-danger alert-dismissible>
+                                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                                <h5>
+                                    <i class="icon fas fa-check"></i>
+                                    ¡Error!
+                                </h5>
+                                Error al modificar el stock
+                            </div>
+                        </div>
+                    ';
+                }
+            }
         }
     }
 ?>
