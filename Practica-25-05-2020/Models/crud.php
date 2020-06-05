@@ -90,6 +90,87 @@
 
 
 
+        //Este modelo permite conocer cuantos prodyctos existen en la base de datos con stock superior a 1
+        public function obtenerProductsModel($tabla){
+        	$stmt = Conexion::conectar()->prepare("SELECT id_product AS 'id', name_product AS 'nproduct' , price_product AS 'nprecio' FROM $tabla WHERE stock >= 1");
+        	$stmt -> execute();
+        	return $stmt->fetch();
+        	$stmt -> close();
+        }
+        //Este modelo trae los datos que se muestra en la tabla de la vista que se imprimen en el controlador de vista de productos
+        public function vistaProductsModel($tabla){
+        	$stmt = Conexion::conectar()->prepare("SELECT p.id_product AS 'id', p.code_product AS 'codigo', p.name_product AS 'producto', p.date_added AS 'fecha', p.price_product AS 'precio', p.stock AS 'stock', c.name_category AS 'categoria' FROM $tabla p INNER JOIN categories c ON p.id_category = c.id_category");
+        	$stmt -> execute();
+        	return $stmt->fetchAll();
+        	$stmt -> close();
+        }
+        //Este modelo permite insertar en la tabla productos a partir de los datos traidos en el array y la tabla por lo se den los valores y se genera la insercción
+        public function insertarProductModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (code_producto, name_product, price_product, stock, id_category) VALUES (:codigo, :nombre, :precio, :stock, :categoria");
+        	$stmt -> bindParam(":codigo", $datosModel["codigo"], PDO::PARAM_STR);
+        	$stmt -> bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
+        	$stmt -> bindParam(":precio", $datosModel["precio"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":stock", $datosModel["stock"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":categoria", $datosModel["categoria"], PDO::PARAM_INT);
+
+        	if($stmt->execute()){
+        		return "success";
+        	}else{
+        		return "error";
+        	}
+
+        	$stmt->close();
+        }
+        //Este modelo trae los datos que necesitan editar en el formulario de edición de productos a partir del id del prodycto enviado por parámetro
+        public function editarProductModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("SELECT id_product AS 'id', code_producto AS 'codigo', name_product AS 'nombre', price_product AS 'precio', stock FROM $tabla WHERE id_product = :id");
+        	$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
+        	$stmt -> execute();
+        	return $stmt->fetchAll();
+        	$stmt -> close();
+        }
+        //Este modelo permite actualizar la tabla producto recibiendo solamete el stock y el id esta sentencia agrega stock
+        public function pushProductsModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET stock = stock + :stock WHERE id_product = :id");
+        	$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_INT);
+        	$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+        	if($stmt->execute()){
+        		return "success";
+        	}else{
+        		return "error";
+        	}
+
+        	$stmt->close();
+        }
+        //Este modelo actualiza la tabla producto recibiendo solamente el stock y el id esta sentencia quita el stock
+        public function pullProductsModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET stock = stock + :stock WHERE id_product = :id AND stock >= :stock");
+        	$stmt->bindParam(":stock", $datosModel["stock"], PDO::PARAM_INT);
+        	$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+        	if($stmt->execute()){
+        		return "success";
+        	}else{
+        		return "error";
+        	}
+
+        	$stmt->close();
+        }
+        //Este modelo permite actualizar la tabla producto escribiendo los datos necesarios a partir del arreglo y de la tabla promedio de pdo actualiza dicha tabla mandando una respuesta como las demas dando un success y o error como respuesta para los controladores
+        public function actualizarProductModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET code_producto = :odigo, name_product = :nombre, price_product = :precio, id_category = :categoria, stock = :stock WHERE id_product = :id");
+        	$stmt -> bindParam(":codigo", $datosModel["codigo"], PDO::PARAM_STR);
+        	$stmt -> bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
+        	$stmt -> bindParam(":precio", $datosModel["precio"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":stock", $datosModel["stock"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":categoria", $datosModel["categoria"], PDO::PARAM_INT);
+        	$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_INT);
+        	if($stmt->execute()){
+        		return "success";
+        	}else{
+        		return "error";
+        	}
+        	$stmt->close();
+        }
         //Este modelo permite eliminar los datos a travez del arreglo anterior que trae el id en el cual en la siguiente sentencia solo elimina a partir del id recibido
         public function eliminarProductsModel($datosModel,$tabla){
             $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_product = :id");
@@ -111,17 +192,54 @@
         //MODELOS PARA EL HISTORIAL
         //Recibe la tabla por el parametro y en los select recolectamos los datos que necesita la tabla historial de la vista a partir del PDO
         public function vistaHistorialModel($tabla){
-            //......................
-
-
-
-
-
+        	$stmt = Conexion::conectar()->prepare("SELECT CONCAT(t.firstname, ':', u.user_name) AS 'usuario', p.name_product AS 'producto', h.date AS 'fecha', h.reference AS 'referencia', h.note AS 'nota' h.quantity AS 'cantidad' FROM $tabla h INNER JOIN products p ON h.id_product = p.id_product INNER JOIN users u ON h.user_id = u.user_id");
+        	$stmt -> execute();
+        	return $stmt->fetchAll();
+        	$stmt -> close();
         }
 
+        //Recibe la tabla por parámetro al igual que los datos necesarios para el INSERT recolectados de los formularios anteriores los datos que necesita la tabla historial de al instertar apartir de PDO
+        public function insertarHistorialModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(user_id, quantity, id_producto, note, reference) VALUES (:user, :cantidad, :producto, :note, :reference)");
+        	$stmt -> bindParam(":user", $datosModel["user"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":cantidad", $datosModel["cantidad"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":producto", $datosModel["producto"], PDO::PARAM_INT);
+        	$stmt -> bindParam(":note", $datosModel["note"], PDO::PARAM_STR);
+        	$stmt -> bindParam(":reference", $datosModel["reference"], PDO::PARAM_STR);
+        	if($stmt->execute()){
+        		return "success";
+        	}else{
+        		return "error";
+        	}
+        	$stmt->close();
+        }
 
-
-
+        //MODELOS PARA CATEGORIAS
+        //Estemodelo se utiliza para mostrar la información de cada categoría.
+        public function vistaCategoriesModel($tabla){
+        	$stmt = Conexion::conectar()->prepare("SELECT id_category AS 'idc', name_category AS 'ncategoria' descripcion_category AS 'dcategoria', date_added AS 'fcategoria' FROM $tabla");
+        	$stmt -> execute();
+        	return $stmt->fetchAll();
+        	$stmt -> close();
+        }
+        //Este modelo utiliza para insertar una nueva categoría a la base de datos
+        public function insertarCategoryModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (name_category, descripcion_category) VALUES (:ncategoria, :dcategoria)");
+        	if($stmt->execute()){
+        		return "success";
+        	}else{
+        		return "error";
+        	}
+        	$stmt->close();
+        }
+        //Este modelo se utiliza para cargar los datos de la categoria para modificarlos más adelante.
+        public function editarCategoryModel($datosModel, $tabla){
+        	$stmt = Conexion::conectar()->prepare("SELECT id_category AS 'id', name_category AS 'nombre_categoria', descripcion_category AS 'descripcion_categoria' FROM $tabla WHERE id_category = :id");
+        	$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
+        	$stmt -> execute();
+        	return $stmt->fetchAll();
+        	$stmt -> close();
+        }
         //Este modelo se utiliza para modificar una categoria
         public function actualizarCategoryModel($datosModel,$tabla){
             $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET name_category = :nombre_categoria, description_category = :descripcion_categoria WHERE id_category = :id");
@@ -146,6 +264,7 @@
             }
             $stmt->close();
         }
+
         //MODELOS PARA SELECTS
         //Este modelo permite crear un select y mostrarlo a partir de un select en php dando las categorias y nombres en el formulario
         public function obtenerCategoryModel($tabla){
@@ -214,7 +333,7 @@
         }
         //Este modelo se utiliza para modificar la ganancia de la venta, se utiliza cada qeu se agrega un producto
         public function updateGananciaVentasModel($datosModel,$tabla){
-            $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET amount = :total Where id_sales = :id");
+            $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET amount = :total WHERE id_sales = :id");
             $stmt->bindParam(":total",$datosModel["Total"],PDO::PARAM_INT);
             $stmt->bindParam(":id",$datosModel[":id"],PDO::PARAM_INT);
             if ($stmt->execute()) {
@@ -234,7 +353,7 @@
         }
         //Este modelo sirve para conocer la ganancia total que se tiene de todas las ventas
         public function obtenerGananciasModel($datosModel,$tabla){
-            $stmt = Conexion::conectar()->prepare("SELECT SUM(price_count) AS 'total' FROM $tabla Where id_sales = :id");
+            $stmt = Conexion::conectar()->prepare("SELECT SUM(price_count) AS 'total' FROM $tabla WHERE id_sales = :id");
             $stmt->bindParam(":id",$datosModel["id"],PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch();
@@ -255,9 +374,9 @@
             return $stmt->fetch();
             $stmt->close();
         }
-        /*-- Este modelo permite conocer cuantos productos existen en la base de datoscon stock superior a 1--*/
+        /*-- Este modelo permite conocer cuantos productos existen en la base de datoscon stock superior a 1
         public function obtenerProductsModel($tabla){
             $stmt = Conexion::conectar()->prepare("SELECT id_product AS 'id',name_producto AS cantidad");
-        }
+        }--*/
     }
 ?>
