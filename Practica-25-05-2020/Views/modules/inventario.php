@@ -41,7 +41,7 @@
 						<thead class="table-success">
 							<tr>
 								<th>¿Editar?</th>
-								<th>Eliminar?</th>
+								<th>¿Eliminar?</th>
 								<th>ID</th>
 								<th>Código del producto</th>
 								<th>Nombre del producto</th>
