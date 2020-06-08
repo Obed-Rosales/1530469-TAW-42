@@ -3,17 +3,18 @@
     class MvcController{
         /*-- Método/función que sirve para devolver la estructura base del sistema --*/
         public function plantilla(){
-            include "views/template.php";
+            //include "Views/template.php";
+            include "Views/modules/ingresar.php";
         }
 
         /*-- Método/función que sirve para mostrarle al usuario la pantalla correspondiente a la acción que ha seleccionado --*/
         public function enlacesPaginasController(){
             if (isset($_GET['action'])) {
-                $enlacesController = $_GET['action'];
+                $enlaces = $_GET['action'];
             }else {
-                $enlacesController = 'index';
+                $enlaces = 'index';
             }
-            $respuesta = EnlacesPaginas::enlacesPaginasModel($enlacesController);
+            $respuesta = EnlacesPaginas::enlacesPaginasModel($enlaces);
             include $respuesta;
         }
 
