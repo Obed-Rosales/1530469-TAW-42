@@ -26,7 +26,7 @@
 
 <div class="card card-secondary">
 	<div class="card-header">
-		<h3 class="card-title">Inventario</h3>
+		<h3 class="card-title"></h3>
 	</div>
 	<div class="card-body">
 		<div class="row mb-4">
@@ -73,7 +73,7 @@
 	<div class="row mb-3">
 		<div class="card card-secondary">
 			<div class="card-header">
-				<h3 class="card-title">Historial</h3>
+				<h3 class="card-title">Catalogo</h3>
 			</div>
 			<div class="card-body">
 				<div id="example2-wrapper" class="dataTables_wrapper dt-botstrap4">
