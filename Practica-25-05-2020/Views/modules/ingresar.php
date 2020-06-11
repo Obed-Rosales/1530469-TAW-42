@@ -39,7 +39,7 @@
 <!--/.Llamada al controlador que verifica el inicio de sesión-->
 <?php  
 	$ingreso = new MvcController();
-	$ingreso -> ingresoUsuarioController();
+	$ingreso -> ingresoUserController();
 	//Se verifica si existe alguna falla al iniciar sesión y se le notifica al usuario
 	if (isset($_GET["res"])) {
 		//if (isset($_GET["res"] == "fallo")) {

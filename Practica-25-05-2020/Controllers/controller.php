@@ -631,7 +631,7 @@
         //Esta funcion  permite quitar productos al stock atravez del boton y un formulario para agregar dicha cantidad al producto se llama al modelo correspondiente para asi pasar al controlador que actualiza dicho modelo
         public function delProductController(){
             $datosController = $_GET["idProductDel"];
-            $respuesta = Datos::editarProductsModel($datosController,"products");
+            $respuesta = Datos::editarProductModel($datosController,"products");
             ?>
             <div class="col-md-6 mt-3">
                 <div class="card card-danger">

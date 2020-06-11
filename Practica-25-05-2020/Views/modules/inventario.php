@@ -1,8 +1,8 @@
 <?php 
 	//Se verifica que exxista una sesión, en caso de que no sea asi se muestra el login.
-	if(!isset($_SESION['validar'])){
-		header("location:index.php?action=ingresar");
-	}
+	//if(!isset($_SESION['validar'])){
+	//	header("location:index.php?action=ingresar");
+	//}
 
 	//Llamada a los controladores para insertar/modificar/eliminar produtos y su stock
 	$inventario = new MvcController();
