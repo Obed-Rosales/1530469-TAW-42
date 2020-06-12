@@ -11,7 +11,7 @@
         //Modelo para el inicio de sesion de los usuarios
         public function ingresoUserModel($datosModel, $tabla){
             //Prepara las sentencias de PDO para ejecutar el Qery de validacion de usuario
-            $stmt = Conexion::conectar()->prepare("SELECT CONCAT(firstname,' ',lastname) AS 'nombre_usuario, user_name AS  ");
+            $stmt = Conexion::conectar()->prepare("SELECT CONCAT(firstname,' ',lastname) AS 'nombre_usuario', user_name AS 'usuario', user_password AS 'contrasena', user_id AS 'id' FROM $tabla WHERE user_name = :usuario");
             $stmt->bindParam(":usuario",$datosModel["user"],PDO::PARAM_STR);
             $stmt->execute();
             return $stmt->fetch();

@@ -1,4 +1,4 @@
-<div class="login-box">
+<div class="login-box container">
 	<div class="login-logo">
 		<a href="index.php"><b>Sistema de </b> Inventarios</a>
 	</div>
@@ -38,20 +38,19 @@
 
 <!--/.Llamada al controlador que verifica el inicio de sesión-->
 <?php  
+
 	$ingreso = new MvcController();
 	$ingreso -> ingresoUserController();
 	//Se verifica si existe alguna falla al iniciar sesión y se le notifica al usuario
 	if (isset($_GET["res"])) {
-		//if (isset($_GET["res"] == "fallo")) {
-        if ($_GET["res"] == "fallo"){
+		if ($_GET["res"] == "fallo") {
 			echo "Falla al ingresar";
 		}
 	}
 
 	//Se verifica que se haya cerrado la sesión actual
 	if (isset($_GET["salir"])) {
-		//if (isset($_GET["salir"] == "1")) {
-        if ($_GET["salir"] == "1"){
+		if ($_GET["salir"] == "1") {
 			echo "Ha cerrado sesión exitosamente";
 		}
 	}
