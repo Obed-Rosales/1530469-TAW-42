@@ -6,6 +6,7 @@
 			include "views/template.php"; //Incluye la vista del template.
 		} //Termina la gunción página.
 
+		
 		//ENLACES
 		//Controlador Mostrar enlaces
 		public function enlacesPaginasController(){ //Crea la función para mandar a llamar los enlaces del sistemas que tienen como propósito mostrar las vistas.
