@@ -1,3 +1,3 @@
 <?php 
-	echo 'Fallo'; 
+	echo ' Algo anda mal, el inicio Falló'; 
 ?>
