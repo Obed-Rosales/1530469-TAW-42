@@ -18,7 +18,7 @@
 <aside class="main-sidebar sidebar-dark-success elevation-4">
     <!-- Logo -->
     <a href="index.php?action=tablero" class="brand-link nav-success">
-        <img src="views/assets/dist/img/UPV.png" alt="Inventarios | TAW | UPV" class="brand/image img-square" style="opacity: .8">
+        <img src="views/assets/dist/img/UPV.jpg" alt="Inventario 2020" class="brand/image img-square" style="opacity: .8">
         <span class="brand-text font-weiht-ligth">Inventarios 2020</span>
     </a>
 

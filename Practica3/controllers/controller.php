@@ -74,8 +74,8 @@
 					"user"	 => $_POST["txtUser"], //Obtiene el usuario que se envía desde el formulario de ingresar.
 					"password"	 => $_POST["txtPassword"]); //Obtiene el password que se envía desde el formulario de ingresar.
 				$respuesta = Datos::ingresoUsuarioModel($datosController, "users"); //Se le dice al modelo models/crud.php (Datos::ingresoUsuarioModel), que en la clase "Datos", la funcion "ingresoUsuarioModel" reciba en sus 2 parametros los valores "$datosController" y el nombre de la tabla a conectarnos la cual es "usuarios".
-
-				if($respuesta["usuario"] == $_POST["txtUser"] && password_verify($_POST["txtPassword"], $respuesta["contrasena"])){ //Validación de la respuesta del modelo para ver si es un usuario correcto.
+				if($respuesta["usuario"] == $_POST["txtUser"] && $_POST["txtPassword"] == $respuesta["contrasena"]){ //Validación de la respuesta del modelo para ver si es un usuario correcto.
+				//if($respuesta["usuario"] == $_POST["txtUser"] && password_verify($_POST["txtPassword"], $respuesta["contrasena"])){ //Validación de la respuesta del modelo para ver si es un usuario correcto.
 					session_start(); //Crea la sesión mediante una petición POST.
 					$_SESSION["validar"] 		= true; //Es una variable de sesión se guarda en el navegador y sirve para validar la sesión del usuario.
 					$_SESSION["nombre_usuario"] = $respuesta["nombre_usuario"]; //Es una variable de sesión que guarda el nombre del usuario.

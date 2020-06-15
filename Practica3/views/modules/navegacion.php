@@ -18,9 +18,9 @@
 <!--Main sidebar container-->
 <aside class="main-sidebar sidebar-dark-success elevation-4">
     <!--brand logo-->
-    <a href="index.php?action=tablero" class="bews/assets/dist/img/UPV.pngrand-link nav-success">
-        <img src="vi" alt="Practica 5 | TAW | UPV" class="brand-imagge img-square" stype="opacity: .8">
-        <span class="brand-text font-weight-light">Inventarios</span>
+    <a href="index.php?action=tablero" class="vews/assets/dist/img/UPV.png rand-link nav-success">
+        <img src="views/assets/dist/img/UPV.jpg" alt="Practica 3|TAW|UPV" class="img-circle elevation-2" stype="opacity: .8">
+        <!--<span class="brand-text font-weight-light">Inventarios</span>-->
     </a>
 
     <!--Slidebar-->
@@ -53,25 +53,33 @@
                 </li>
                 <li class="nav-item">
                     <a href="index.php?action=usuarios" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>Usuarios</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="index.php?action=inventario" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-box"></i>
                         <p>Productos</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="index.php?action=categoria" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-tag"></i>
                         <p>Categorias</p>
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="index.php?action=categorias" class="nav-link">
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>
+                            Ventas
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="index.php?action=salir" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-tag"></i>
                         <p>Salir</p>
                     </a>
                 </li>
