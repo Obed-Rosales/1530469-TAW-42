@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?action=categorias" class="nav-link">
+                    <a href="index.php?action=ventas" class="nav-link">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                             Ventas
