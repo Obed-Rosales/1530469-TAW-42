@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        //aqui se agregan las URL's para su excepcion
+        'http://127.0.0.1:8000/saludo,*',
+        'http://127.0.0.1:8000/api/empleados'
     ];
 }
