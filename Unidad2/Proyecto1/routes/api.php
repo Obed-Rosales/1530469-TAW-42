@@ -10,7 +10,7 @@ Route::get('empleados',function(){
     return $empleados;
 });
 
-//Ruta para crear nuevos empleados y recibir data (face 1)
+//Ruta para guardar nuevos empleados y recibir data (face 1)
 Route::post('empleados',function(Request $request){
     //Verifica que los datos se escriban bien para guardar en la bd, utilizamos Request
 
@@ -19,8 +19,6 @@ Route::post('empleados',function(Request $request){
 
     //Retornar todos los valores del array del form elaborado en postman
     //return $request->all();
-
-
 
     //Validar data de empleado:
     $request->validate([
@@ -47,6 +45,41 @@ Route::post('empleados',function(Request $request){
     return "Usuario creado";
 });
 
+//Ruta para actualizar empleados
+Route::put('empleados/{id}',function(Request $request, $id){
+    $request->validate([
+        'nombres' => 'required|max:50',
+        'apellidos' => 'required|max:50',
+        'cedula' => 'required|max:20',
+        'email' => 'required|max:50|email|unique:empleados,email,'.$id,
+        'lugar_nacimiento'=>'required|max:50',
+        'sexo'=>'required|max:50',
+        'estado_civil'=>'required|max:50',
+        'telefono'=>'required|numeric'
+    ]);
+
+    $empleado = Empleado::findOrFail($id);
+    $empleado->nombres = $request->input('nombres');
+    $empleado->apellidos = $request->input('apellidos');
+    $empleado->cedula = $request->input('cedula');
+    $empleado->correo = $request->input('correo');
+    $empleado->lugar_nacimiento = $request->input('lugar_nacimiento');
+    $empleado->sexo = $request->input('sexo');
+    $empleado->estado_civil = $request->input('estado_civil');
+    $empleado->telefono = $request->input('telefono');
+    $empleado->save();
+    return 'Empleado actualizado';
+});
+
+//Ruta para eliminar empleados
+Route::delete('empleados/{id}',function($id){
+    $empleado=Empleado::findOrFail($id);
+    $empleado->delete();
+    return 'Empleado eliminado';
+});
+
+//Tarea:
+// 
 
 //COMANDOS
 /*
