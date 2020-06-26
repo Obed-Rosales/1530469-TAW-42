@@ -2,6 +2,39 @@
 
 use Illuminate\Support\Facades\Route;
 
+//Vista para el controlador empleados
+Route::resource('empleados','empleadosController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +45,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,3 +75,4 @@ Route::get('saludo/{nombre}/{apodo?}',function($nombre,$apodo=null){
 
 // Metodos para obtencion, guardado y eliminacion de datos:
 // get (listado u obtener), post (guardar), put (actualizar), delete
+*/

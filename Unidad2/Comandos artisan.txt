@@ -1,0 +1,9 @@
+-Comandos de artisan-
+
+//Para crear un controlador
+	php artisan make:controller nombreDelControlador
+
+//Para migrar
+	php artisan make:migration Nombre
+	
+	php artisan migrate

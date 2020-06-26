@@ -79,7 +79,10 @@ Route::delete('empleados/{id}',function($id){
 });
 
 //Tarea:
-// 
+// crear las viastas para los metodos anteriores.
+
+
+
 
 //COMANDOS
 /*
